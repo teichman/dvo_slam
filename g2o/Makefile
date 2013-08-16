@@ -12,7 +12,7 @@ include $(shell rospack find mk)/git_checkout.mk
 sophus: download
 	mkdir -p build && cd build && \
 	cmake -DCMAKE_INSTALL_PREFIX=`pwd`/..  ../$(GIT_DIR) && \
-  make install
+  make install -j`cat /proc/cpuinfo  | grep processor | wc -l`  # Use as many cores as you have.
 
 clean: 
 	rm -rf $(GIT_DIR) patched build include lib rospack_nosubdirs
